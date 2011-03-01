@@ -11,7 +11,7 @@ run 'rm Gemfile'
 file 'Gemfile', <<-EOF
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.0.5'
 gem 'seo_meta_builder'
 gem 'devise', '>= 1.2.rc'
 gem 'formtastic'
@@ -22,8 +22,8 @@ gem 'haml'
 gem "haml-rails"
 gem 'compass'
 gem 'tabletastic', '>= 0.2.1'
-gem 'validates_url_format_of'
 gem 'jquery-rails'
+gem "crummy"
 
 group :development do
   gem 'capistrano'
@@ -55,17 +55,13 @@ if yes? "Do you want Mysql ?"
   db = 'mysql'
 else
   if yes? "Do you want Mongoid ?"
-    gem "mongoid", "2.0.0.beta.20"
-    gem "bson_ext", "1.1.2"
+    gem "mongoid", "2.0.0.rc.6"
+    gem "bson_ext", "~> 1.2"
     db = 'mongoid'
   else
     gem 'sqlite3-ruby', :require => 'sqlite3'
     db = 'sqlite'
   end
-end
-
-if yes? 'Do you want to be abble to generate uml model diagrams ?'
-  plugin 'yUMLmeRails', :git => 'git://github.com/tute/yUMLmeRails.git'
 end
 
 run 'bundle install'
@@ -82,7 +78,6 @@ else
 end
 
 generate :rspec
-#run 'haml --rails .'
 run 'compass init rails .'
 
 inside('app/stylesheets/') { run 'rm *' }
